@@ -588,7 +588,7 @@ This script applies several direct containment controls:
    `Microsoft Defender → Devices → Select VM → Isolate Device`
    
 <p align="left">
-  <img src="screenshots/Screenshot 2025-11-21 130018" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 130018.png" width="750">
 </p>
 
    This cut the VM off from external network communication except for Defender and management channels, fully containing the threat.
@@ -738,5 +738,5 @@ With containment and recovery fully completed and validated, I closed the incide
 * Saved the incident to finalize the response lifecycle
 
 <p align="left">
-  <img src="screenshots/Screenshot 2025-11-21 134643" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 134643.png" width="750">
 </p>
