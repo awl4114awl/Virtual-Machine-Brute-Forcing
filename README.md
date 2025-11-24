@@ -14,9 +14,21 @@ When entities (local or remote users, usually) attempt to log into a virtual mac
 
 My goal is to work the incidents being generated within Azure Sentinel, in accordance with the **NIST 800-61 Incident Management Lifecycle**.
 
-![image1](image1.png)
+<p align="left">
+  <img src="screenshots/Cyber-Incident-Response-Cycle-234.png" width="500">
+</p>
 
-![image2](image2.png)
+---
+
+### How the Logging Architecture Works (Simplified)
+
+The diagram below shows the simplified logging flow in the Cyber Range. My virtual machine generates security events (like failed logons), which are collected by **Microsoft Defender for Endpoint** and forwarded to **Microsoft Sentinel**, the SIEM. Sentinel also receives identity logs from **Azure Active Directory (Entra ID)** and resource activity from the **Azure Portal**.
+
+All of these signals converge in Sentinel, where analytics rules evaluate the combined data. When a rule is matched—such as repeated failed logins—Sentinel creates an **alert**, and related alerts are grouped into an **incident** for investigation.
+
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 113059.png" width="500">
+</p>
 
 ---
 
@@ -52,9 +64,10 @@ I ensured the Network Security Group was **WIDE OPEN**, allowing all traffic so 
 
 I logged into it and disabled the Windows Firewall (`start → run → wf.msc → turn firewall off for all profiles`); this was just to let the VM be discovered by bad actors on the Internet more easily.
 
-![image3](image3.png)
-
-![image4](image4.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 081054.png" width="300">
+  <img src="screenshots/Screenshot 2025-11-21 081253.png" width="700">   
+</p>
 
 I opened Edge in the VM and navigated to:
 
@@ -64,13 +77,17 @@ Then I downloaded the package.
 
 I ran the executable.
 
-![image5](image5.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 082048.png" width="700"> 
+</p>
 
 I ensured it was appearing as onboarded in the MDE Portal:
 
 `https://security.microsoft.com/machines`
 
-![image6](image6.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 082555.png" width="750"> 
+</p>
 
 I ensured the logs were showing up in one of the tables. For example, I went to **Hunting → Advanced Hunting** and searched for my device in one of the tables with this query:
 
@@ -80,7 +97,9 @@ DeviceLogonEvents
 | order by Timestamp desc
 ````
 
-![image7](image7.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 082818.png" width="750"> 
+</p>
 
 ---
 
@@ -211,7 +230,9 @@ DeviceLogonEvents
 | order by Timestamp desc
 ```
 
-![image8](image8.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 104156.png" width="750"> 
+</p>
 
 If there were multiple failures → good, Sentinel would detect it.
 
@@ -230,11 +251,11 @@ I went to:
 
 `Sentinel → Incidents`
 
-![image9](image9.png)
-
-![image10](image10.png)
-
-![image11](image11.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 105755.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 110244.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 110806.png" width="750">
+</p>
 
 The moment I created the rule, Sentinel immediately ran the KQL query once.
 This first run is what produced the alert.
@@ -342,13 +363,12 @@ This is typical for SOC workflow.
 
 After the Scheduled Query Rule triggered, I opened the incident within **Microsoft Sentinel → Incidents** and began the investigation process. I set myself as the **Owner** and changed the incident status to **Active** in order to work the case.
 
-![image12](image12.png)
-
-![image13](image13.png)
-
-![image14](image14.png)
-
-![image15](image15.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 113314.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 113402.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 113722.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 113918.png" width="750">
+</p>
 
 ---
 
@@ -356,11 +376,11 @@ After the Scheduled Query Rule triggered, I opened the incident within **Microso
 
 Once inside the incident, I selected **Investigate** to load the entity graph. Sentinel automatically mapped all related entities (hosts, IP addresses, alerts, and correlated activity) into a visual format. This helped me identify how the brute-force attack interacted with my VM.
 
-![image16](image16.png)
-
-![image17](image17.png)
-
-![image18](image18.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 114226.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 114352.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 114636.png" width="750">
+</p>
 
 ---
 
@@ -414,9 +434,10 @@ Sentinel recorded minimal outbound traffic originating from this IP toward vario
 **Assessment**
 This IP is consistent with a distributed, automated brute-force bot system — common in global RDP brute-force campaigns originating from compromised servers.
 
-![image19](image19.png)
-
-![image20](image20.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 121733.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 121757.png" width="750">
+</p>
 
 ---
 
@@ -448,9 +469,10 @@ Traffic coming from this IP was minimal (**5–6 bytes** per connection), indica
 **Assessment**
 This is typical of internet-wide RDP scanning botnets, which sweep for exposed hosts and attempt common passwords in bulk.
 
-![image21](image21.png)
-
-![image22](image22.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 121444.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 122135.png" width="750">
+</p>
 
 Other IP addresses shown in the entity graph were related to activity across the Cyber Range environment and not specifically associated with my VM. For the purposes of this investigation, I focused only on the IPs that directly targeted my system.
 
@@ -485,7 +507,9 @@ DeviceLogonEvents
 | order by Timestamp desc
 ```
 
-![image23](image23.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 122251.png" width="750">
+</p>
 
 The result returned **zero successful authentication events**, meaning:
 
@@ -529,7 +553,9 @@ To stop the ongoing brute-force attempts targeting the VM, I executed my custom 
 ./final-hardening.ps1
 ```
 
-![image24](image24.png)
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 133108.png" width="750">
+</p>
 
 This script applies several direct containment controls:
 
@@ -560,8 +586,10 @@ This script applies several direct containment controls:
    In addition to firewall enforcement, I isolated the VM in the MDE portal:
 
    `Microsoft Defender → Devices → Select VM → Isolate Device`
-
-   ![image25](image25.png)
+   
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 130018" width="750">
+</p>
 
    This cut the VM off from external network communication except for Defender and management channels, fully containing the threat.
 
@@ -709,6 +737,6 @@ With containment and recovery fully completed and validated, I closed the incide
 * Added notes referencing the containment and remediation steps
 * Saved the incident to finalize the response lifecycle
 
-![image26](image26.png)
-
----
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 134643" width="750">
+</p>
