@@ -1,4 +1,4 @@
-# 🔐 Virtual Machine Brute Forcing
+# 🔵 Virtual Machine Brute Forcing
 
 ![Microsoft Defender for Endpoint](https://img.shields.io/badge/Microsoft_Defender_for_Endpoint-7A57D1?style=for-the-badge&logo=microsoftdefender&logoColor=white)
 ![Azure](https://img.shields.io/badge/Azure_Sentinel-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
