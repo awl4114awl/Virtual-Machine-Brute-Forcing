@@ -103,7 +103,7 @@ DeviceLogonEvents
 
 ---
 
-## 3️⃣ Create Alert Rule (Brute Force Attempt Detection)
+### 3️⃣ Create Alert Rule (Brute Force Attempt Detection)
 
 1. I went to **Microsoft Sentinel**
    `Microsoft Sentinel → Your Workspace`
@@ -213,7 +213,7 @@ Create incidents from this rule: **Enabled**
 
 ---
 
-## 4️⃣ Trigger Alert to Create Incident
+### 4️⃣ Trigger Alert to Create Incident
 
 I triggered the rule manually to create an incident. If the necessary logs to trigger the rule didn’t exist, I created the logs by failing to log into the machine an adequate number of times.
 
@@ -359,7 +359,7 @@ This is typical for SOC workflow.
 
 ---
 
-## 5️⃣ Work Incident
+### 5️⃣ Work Incident
 
 After the Scheduled Query Rule triggered, I opened the incident within **Microsoft Sentinel → Incidents** and began the investigation process. I set myself as the **Owner** and changed the incident status to **Active** in order to work the case.
 
@@ -530,7 +530,7 @@ I can copy/paste this directly into my Google Doc.
 
 ---
 
-## 6️⃣ Containment, Eradication & Recovery (Final Response)
+### 6️⃣ Containment, Eradication & Recovery (Final Response)
 
 ### Containment
 
