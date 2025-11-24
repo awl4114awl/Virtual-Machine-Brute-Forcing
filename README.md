@@ -103,7 +103,7 @@ DeviceLogonEvents
 
 ---
 
-## Part 1: Create Alert Rule (Brute Force Attempt Detection)
+## 3️⃣ Create Alert Rule (Brute Force Attempt Detection)
 
 1. I went to **Microsoft Sentinel**
    `Microsoft Sentinel → Your Workspace`
@@ -213,7 +213,7 @@ Create incidents from this rule: **Enabled**
 
 ---
 
-## Part 2: Trigger Alert to Create Incident
+## 4️⃣ Trigger Alert to Create Incident
 
 I triggered the rule manually to create an incident. If the necessary logs to trigger the rule didn’t exist, I created the logs by failing to log into the machine an adequate number of times.
 
@@ -359,15 +359,18 @@ This is typical for SOC workflow.
 
 ---
 
-## Part 3: Work Incident
+## 5️⃣ Work Incident
 
 After the Scheduled Query Rule triggered, I opened the incident within **Microsoft Sentinel → Incidents** and began the investigation process. I set myself as the **Owner** and changed the incident status to **Active** in order to work the case.
 
 <p align="left">
-  <img src="screenshots/Screenshot 2025-11-21 113314.png" width="750">
-  <img src="screenshots/Screenshot 2025-11-21 113402.png" width="750">
-  <img src="screenshots/Screenshot 2025-11-21 113722.png" width="750">
-  <img src="screenshots/Screenshot 2025-11-21 113918.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 113314.png" width="400">
+</p>
+<p align="left">
+  <img src="screenshots/Screenshot 2025-11-21 113402.png" width="400">
+</p>
+  <img src="screenshots/Screenshot 2025-11-21 113722.png" width="300">
+  <img src="screenshots/Screenshot 2025-11-21 113918.png" width="300">
 </p>
 
 ---
@@ -527,7 +530,7 @@ I can copy/paste this directly into my Google Doc.
 
 ---
 
-## Part 4 — Containment, Eradication & Recovery (Final Response)
+## 6️⃣ Containment, Eradication & Recovery (Final Response)
 
 ### Containment
 
@@ -738,5 +741,5 @@ With containment and recovery fully completed and validated, I closed the incide
 * Saved the incident to finalize the response lifecycle
 
 <p align="left">
-  <img src="screenshots/Screenshot 2025-11-21 134643.png" width="750">
+  <img src="screenshots/Screenshot 2025-11-21 134643.png" width="400">
 </p>
