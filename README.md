@@ -1,4 +1,4 @@
-# 🔵 Virtual Machine Brute Forcing
+# 📝 Virtual Machine Brute Forcing
 
 ![Microsoft Defender for Endpoint](https://img.shields.io/badge/Microsoft_Defender_for_Endpoint-7A57D1?style=for-the-badge&logo=microsoftdefender&logoColor=white)
 ![Azure](https://img.shields.io/badge/Azure_Sentinel-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
@@ -101,7 +101,7 @@ Here is **EVERYTHING** from my rule creation screen.
 
 ---
 
-### 🔧 Analytics Rule Configuration (Full Breakdown)
+### Analytics Rule Configuration (Full Breakdown)
 
 #### Analytics rule details
 
@@ -200,7 +200,7 @@ I triggered the rule manually to create an incident. If the necessary logs to tr
 
 ---
 
-### 1️⃣ Validate Logs are Flowing (Optional but Smart)
+### Validate Logs are Flowing (Optional but Smart)
 
 In Defender → Advanced Hunting, I ran:
 
@@ -217,14 +217,14 @@ If there were multiple failures → good, Sentinel would detect it.
 
 ---
 
-### 2️⃣ Wait for Sentinel to Process the Logs
+### Wait for Sentinel to Process the Logs
 
 I waited **3–5 minutes** for Sentinel to process the logs.
 The rule uses a **5-hour lookback**, so it would definitely catch this.
 
 ---
 
-### 3️⃣ Check Sentinel for Incident Creation
+### Check Sentinel for Incident Creation
 
 I went to:
 
@@ -263,9 +263,9 @@ My VM was exposed to the internet with:
 
 That means:
 
-* ✔ Bots
-* ✔ Malware scanners
-* ✔ Internet-wide RDP brute-force crawlers
+* Bots
+* Malware scanners
+* Internet-wide RDP brute-force crawlers
 
 …were already hammering the VM before I even tried to brute-force it myself.
 
@@ -273,9 +273,9 @@ Azure VMs get attacked within minutes of being publicly exposed.
 
 So the 60 failed logins and 40 failed logins are:
 
-* 🔹 Random attackers on the internet
-* 🔹 Brute forcing ALL open RDP ports they can find
-* 🔹 Not just mine
+* Random attackers on the internet
+* Brute forcing ALL open RDP ports they can find
+* Not just mine
 
 My VM is basically “noise on the wire” at this point.
 
@@ -293,11 +293,11 @@ DeviceLogonEvents
 
 This means:
 
-* ✔ Count all logon failures
-* ✔ From ANY IP
-* ✔ Against my machine
-* ✔ Over the last 5 hours
-* ✔ Show only IPs with 10+ failures
+* Count all logon failures
+* From ANY IP
+* Against my machine
+* Over the last 5 hours
+* Show only IPs with 10+ failures
 
 So the output:
 
@@ -319,9 +319,9 @@ The Cyber Range VNet is publicly routable on purpose.
 
 ### Why I Only Got One Incident
 
-* ✔ Alert grouping is **ON**
-* ✔ Suppression is **ON (24 hours)**
-* ✔ Rule runs every **4 hours**
+* Alert grouping is **ON**
+* Suppression is **ON (24 hours)**
+* Rule runs every **4 hours**
 
 So Sentinel effectively says:
 
@@ -460,8 +460,8 @@ Other IP addresses shown in the entity graph were related to activity across the
 
 | IP Address     | Failed Attempts | Region      | Behavior Type                   | TI Match? |
 | -------------- | --------------- | ----------- | ------------------------------- | --------- |
-| 211.170.59.203 | 60              | South Korea | RDP Brute-Force / Login Storms  | ❌ None    |
-| 14.136.73.18   | 40              | Hong Kong   | RDP Brute-Force / Automated Bot | ❌ None    |
+| 211.170.59.203 | 60              | South Korea | RDP Brute-Force / Login Storms  |  None    |
+| 14.136.73.18   | 40              | Hong Kong   | RDP Brute-Force / Automated Bot |  None    |
 
 Both IPs behaved consistently with automated brute-force bots, repeatedly attempting to authenticate via RDP using incorrect credentials. Neither IP showed signs of successful authentication, lateral movement, or malware delivery.
 
@@ -505,7 +505,7 @@ I can copy/paste this directly into my Google Doc.
 
 ## Part 4 — Containment, Eradication & Recovery (Final Response)
 
-### 🔒 Containment
+### Containment
 
 At this stage of the lab, I had already:
 
@@ -579,7 +579,7 @@ Containment was successful and complete.
 
 ---
 
-### 🔧 Eradication & Recovery
+### Eradication & Recovery
 
 After containment, my objective was to ensure the system was clean, hardened, and restored to a secure baseline. The `final-hardening.ps1` script also performs extensive remediation steps that support full eradication and recovery.
 
@@ -649,16 +649,7 @@ After containment, my objective was to ensure the system was clean, hardened, an
 
 ### Summary
 
-Through a combination of:
-
-* Host-level containment (firewall reactivation, MDE isolation)
-* Account and protocol hardening
-* Removal of vulnerable software
-* Enforcement of strong security policies
-* Defender configuration and scanning
-* Audit visibility restoration
-
-…I fully contained the brute-force attempts, eradicated any potential weaknesses, and returned the VM to a secure, hardened operational state.
+Through a combination of Host-level containment (firewall reactivation, MDE isolation), account and protocol hardening, removal of vulnerable software, enforcement of strong security policies, defender configuration and scanning, and audit visibility restoration, I fully contained the brute-force attempts, eradicated any potential weaknesses, and returned the VM to a secure, hardened operational state.
 
 The VM is now significantly more resilient to future brute-force attacks and aligned with industry best practices for endpoint protection.
 
