@@ -20,7 +20,7 @@ My goal is to work the incidents being generated within Azure Sentinel, in accor
 
 ---
 
-### How the Logging Architecture Works (Simplified)
+#### How the Logging Architecture Works (Simplified)
 
 The diagram below shows the simplified logging flow in the Cyber Range. My virtual machine generates security events (like failed logons), which are collected by **Microsoft Defender for Endpoint** and forwarded to **Microsoft Sentinel**, the SIEM. Sentinel also receives identity logs from **Azure Active Directory (Entra ID)** and resource activity from the **Azure Portal**.
 
@@ -120,7 +120,7 @@ Here is **EVERYTHING** from my rule creation screen.
 
 ---
 
-### Analytics Rule Configuration (Full Breakdown)
+#### Analytics Rule Configuration (Full Breakdown)
 
 #### Analytics rule details
 
@@ -219,7 +219,7 @@ I triggered the rule manually to create an incident. If the necessary logs to tr
 
 ---
 
-### Validate Logs are Flowing (Optional but Smart)
+#### Validate Logs are Flowing (Optional but Smart)
 
 In Defender → Advanced Hunting, I ran:
 
@@ -238,14 +238,14 @@ If there were multiple failures → good, Sentinel would detect it.
 
 ---
 
-### Wait for Sentinel to Process the Logs
+#### Wait for Sentinel to Process the Logs
 
 I waited **3–5 minutes** for Sentinel to process the logs.
 The rule uses a **5-hour lookback**, so it would definitely catch this.
 
 ---
 
-### Check Sentinel for Incident Creation
+#### Check Sentinel for Incident Creation
 
 I went to:
 
@@ -302,7 +302,7 @@ My VM is basically “noise on the wire” at this point.
 
 ---
 
-### What My KQL Shows
+#### What My KQL Shows
 
 ```kusto
 DeviceLogonEvents
@@ -375,7 +375,7 @@ After the Scheduled Query Rule triggered, I opened the incident within **Microso
 
 ---
 
-### Investigate the Incident
+#### Investigate the Incident
 
 Once inside the incident, I selected **Investigate** to load the entity graph. Sentinel automatically mapped all related entities (hosts, IP addresses, alerts, and correlated activity) into a visual format. This helped me identify how the brute-force attack interacted with my VM.
 
@@ -387,7 +387,7 @@ Once inside the incident, I selected **Investigate** to load the entity graph. S
 
 ---
 
-### Identifying the Target Host
+#### Identifying the Target Host
 
 The VM involved in the incident was clearly identified as:
 
@@ -401,7 +401,7 @@ This confirmed that the alert was correctly triggered on the virtual machine I d
 
 ---
 
-### Identifying Attacker IP Addresses
+#### Identifying Attacker IP Addresses
 
 The investigation graph revealed multiple IP addresses that had attempted to authenticate against my VM. These appeared in the **Entities** panel and were also visible in the KQL query results.
 
@@ -481,7 +481,7 @@ Other IP addresses shown in the entity graph were related to activity across the
 
 ---
 
-### 🧠 What This Means (Summary)
+#### What This Means (Summary)
 
 | IP Address     | Failed Attempts | Region      | Behavior Type                   | TI Match? |
 | -------------- | --------------- | ----------- | ------------------------------- | --------- |
@@ -499,7 +499,7 @@ These findings validate that:
 
 ---
 
-### Was the Brute-Force Attack Successful?
+#### Was the Brute-Force Attack Successful?
 
 To determine whether any attacker successfully authenticated, I ran an additional KQL query in Advanced Hunting:
 
@@ -532,7 +532,7 @@ I can copy/paste this directly into my Google Doc.
 
 ### 6️⃣ Containment, Eradication & Recovery (Final Response)
 
-### Containment
+#### Containment
 
 At this stage of the lab, I had already:
 
@@ -610,7 +610,7 @@ Containment was successful and complete.
 
 ---
 
-### Eradication & Recovery
+#### Eradication & Recovery
 
 After containment, my objective was to ensure the system was clean, hardened, and restored to a secure baseline. The `final-hardening.ps1` script also performs extensive remediation steps that support full eradication and recovery.
 
@@ -678,7 +678,7 @@ After containment, my objective was to ensure the system was clean, hardened, an
 
 ---
 
-### Summary
+#### Summary
 
 Through a combination of Host-level containment (firewall reactivation, MDE isolation), account and protocol hardening, removal of vulnerable software, enforcement of strong security policies, defender configuration and scanning, and audit visibility restoration, I fully contained the brute-force attempts, eradicated any potential weaknesses, and returned the VM to a secure, hardened operational state.
 
@@ -686,7 +686,7 @@ The VM is now significantly more resilient to future brute-force attacks and ali
 
 ---
 
-### Post-Incident Activities
+#### Post-Incident Activities
 
 After completing containment and eradication, I moved into the post-incident phase, which focuses on documenting findings, identifying improvements, and ensuring long-term prevention.
 
@@ -720,7 +720,7 @@ After completing containment and eradication, I moved into the post-incident pha
 
 ---
 
-### Closure
+#### Closure
 
 * Review and confirm incident resolution.
 * Review/observe my notes for the incident.
