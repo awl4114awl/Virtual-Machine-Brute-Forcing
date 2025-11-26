@@ -10,7 +10,7 @@
 
 ## ℹ️ Overview
 
-When entities (local or remote users, usually) attempt to log into a virtual machine, a log will be created on the local machine and then forwarded to Microsoft Defender for Endpoint under the **DeviceLogonEvents** table. These logs are then forwarded to the Log Analytics Workspace being used by Microsoft Sentinel, my SIEM. Within Sentinel, I define an alert to trigger when the same entity fails to log into the same VM a given number of times within a certain time period (i.e. 10 failed logons or more per 5 hours).
+When entities (local or remote users, usually) attempt to log into a virtual machine, a log will be created on the local machine and then forwarded to Microsoft Defender for Endpoint under the `DeviceLogonEvents` table. These logs are then forwarded to the Log Analytics Workspace being used by Microsoft Sentinel, my SIEM. Within Sentinel, I define an alert to trigger when the same entity fails to log into the same VM a given number of times within a certain time period (i.e. 10 failed logons or more per 5 hours).
 
 My goal is to work the incidents being generated within Azure Sentinel, in accordance with the **NIST 800-61 Incident Management Lifecycle**.
 
@@ -27,7 +27,7 @@ The diagram below shows the simplified logging flow in the Cyber Range. My virtu
 All of these signals converge in Sentinel, where analytics rules evaluate the combined data. When a rule is matched—such as repeated failed logins—Sentinel creates an **alert**, and related alerts are grouped into an **incident** for investigation.
 
 <p align="left">
-  <img src="screenshots/Screenshot 2025-11-21 113059.png" width="500">
+  <img src="screenshots/Screenshot 2025-11-21 113059.png" width="700">
 </p>
 
 ---
