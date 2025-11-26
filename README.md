@@ -116,7 +116,7 @@ DeviceLogonEvents
 
 4. I configured the rest of the rule.
 
-Here is **EVERYTHING** from my rule creation screen.
+Here is everything from my rule creation screen.
 
 ---
 
@@ -274,7 +274,7 @@ So the rule didn’t trigger itself — it just found data that **ALREADY** matc
 
 ### Why Do I See 60 and 40 Failed Events? (And from Multiple IPs?)
 
-This is actually **VERY** normal in the Cyber Range.
+This is actually very normal in the Cyber Range.
 
 My VM was exposed to the internet with:
 
