@@ -1,18 +1,21 @@
 # 💻 Virtual Machine Brute Forcing
 
 ![Cyber Range](https://img.shields.io/badge/Cyber_Range-Lab_Environment-purple?style=for-the-badge)
-![Azure](https://img.shields.io/badge/Azure_Sentinel-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![Microsoft Defender for Endpoint](https://img.shields.io/badge/Microsoft_Defender_for_Endpoint-7A57D1?style=for-the-badge&logo=microsoftdefender&logoColor=white)
-![Windows 11](https://img.shields.io/badge/Windows_11-0078D6?style=for-the-badge&logo=windows11&logoColor=white)
-
+![Azure](https://img.shields.io/badge/Azure_Sentinel-0078D4?style=for-the-badge\&logo=microsoftazure\&logoColor=white)
+![Microsoft Defender for Endpoint](https://img.shields.io/badge/Microsoft_Defender_for_Endpoint-7A57D1?style=for-the-badge\&logo=microsoftdefender\&logoColor=white)
+![Windows 11](https://img.shields.io/badge/Windows_11-0078D6?style=for-the-badge\&logo=windows11\&logoColor=white)
 
 ---
 
 ## ℹ️ Overview
 
-When entities (local or remote users, usually) attempt to log into a virtual machine, a log will be created on the local machine and then forwarded to Microsoft Defender for Endpoint under the `DeviceLogonEvents` table. These logs are then forwarded to the Log Analytics Workspace being used by Microsoft Sentinel, my SIEM. Within Sentinel, I define an alert to trigger when the same entity fails to log into the same VM a given number of times within a certain time period (i.e. 10 failed logons or more per 5 hours).
+This lab was carried out in **The Cyber Range**, an Azure-hosted enterprise environment where I replicate real-world detection, investigation, and remediation workflows. It focuses on brute-force authentication attempts and incident handling within Microsoft Sentinel.
 
-My goal is to work the incidents being generated within Azure Sentinel, in accordance with the **NIST 800-61 Incident Management Lifecycle**.
+---
+
+When entities (local or remote users) attempt to log in to a virtual machine, the event is logged locally and forwarded to Microsoft Defender for Endpoint under the `DeviceLogonEvents` table. Those logs are then forwarded to my Log Analytics Workspace in Microsoft Sentinel, where analytics rules evaluate the activity. I define an alert that triggers when the same entity fails to log in a certain number of times within a defined period (e.g., 10 failed logons in 5 hours).
+
+My goal is to work the resulting Sentinel incidents according to the **NIST 800-61 Incident Management Lifecycle**.
 
 <p align="left">
   <img src="screenshots/Cyber-Incident-Response-Cycle-234.png" width="500">
@@ -22,9 +25,9 @@ My goal is to work the incidents being generated within Azure Sentinel, in accor
 
 #### How the Logging Architecture Works (Simplified)
 
-The diagram below shows the simplified logging flow in the Cyber Range. My virtual machine generates security events (like failed logons), which are collected by **Microsoft Defender for Endpoint** and forwarded to **Microsoft Sentinel**, the SIEM. Sentinel also receives identity logs from **Azure Active Directory (Entra ID)** and resource activity from the **Azure Portal**.
+The diagram below illustrates the simplified logging flow in the Cyber Range. My VM generates security events such as failed logons, which MDE collects and forwards to Microsoft Sentinel. Sentinel also receives identity logs from Azure Active Directory (Entra ID) and resource activity from the Azure Portal.
 
-All of these signals converge in Sentinel, where analytics rules evaluate the combined data. When a rule is matched—such as repeated failed logins—Sentinel creates an **alert**, and related alerts are grouped into an **incident** for investigation.
+All of this telemetry converges in Sentinel, where analytics rules evaluate combined signals. When a rule matches — such as repeated failed login attempts — Sentinel creates an **alert**, and related alerts are grouped into an **incident** for investigation.
 
 <p align="left">
   <img src="screenshots/Screenshot 2025-11-21 113059.png" width="700">
